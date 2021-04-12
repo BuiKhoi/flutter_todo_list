@@ -14,7 +14,7 @@ class Tasks extends StatelessWidget {
         ),
         body: ChangeNotifierProvider.value(
           value: todoList,
-          child: TodoListWidget() ,)
-    );
+          child: TodoListWidget(),
+        ));
   }
 }
