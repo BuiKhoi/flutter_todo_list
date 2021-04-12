@@ -23,8 +23,7 @@ class TodoListWidget extends StatelessWidget {
       ),
       Consumer<TodoListModel>(builder: (contexst, todoList, child) {
         return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Expanded(
                   child: Column(children: <Widget>[
@@ -44,18 +43,20 @@ class TodoListWidget extends StatelessWidget {
                           todoList.saveTasksToSharedPrefs();
                         }))
               ])),
-              Expanded(
+              Align(
+                  alignment: Alignment.bottomRight,
                   child: Column(children: <Widget>[
-                Container(
-                    child: FloatingActionButton(
-                        onPressed: () {
-                          todoList.addTaks(TaskModel(text: _controller.text));
-                          _controller.clear();
-                          todoList.saveTasksToSharedPrefs();
-                        },
-                        tooltip: 'Add Todo',
-                        child: const Icon(Icons.add)))
-              ]))
+                    Container(
+                        child: FloatingActionButton(
+                            onPressed: () {
+                              todoList
+                                  .addTaks(TaskModel(text: _controller.text));
+                              _controller.clear();
+                              todoList.saveTasksToSharedPrefs();
+                            },
+                            tooltip: 'Add Todo',
+                            child: const Icon(Icons.add)))
+                  ]))
             ]);
       }),
     ]);
