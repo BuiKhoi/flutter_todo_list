@@ -32,8 +32,8 @@ class TodoListWidget extends StatelessWidget {
                         controller: _controller,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.teal)),
-                            labelText: 'new task'),
+                                borderSide: BorderSide(color: Colors.teal[500])),
+                            labelText: 'New task'),
                         onSubmitted: (newTask) {
                           todoList.addTaks(TaskModel(
                               text:
@@ -41,7 +41,13 @@ class TodoListWidget extends StatelessWidget {
                           _controller
                               .clear(); // clear the text input after adding taks
                           todoList.saveTasksToSharedPrefs();
-                        }))
+                        }),
+                margin: const EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                )
+
               ])),
               Align(
                   alignment: Alignment.bottomRight,
@@ -55,7 +61,11 @@ class TodoListWidget extends StatelessWidget {
                               todoList.saveTasksToSharedPrefs();
                             },
                             tooltip: 'Add Todo',
-                            child: const Icon(Icons.add)))
+                            backgroundColor: Colors.teal[300],
+                            hoverColor: Colors.teal[600],
+                            child: const Icon(Icons.add)),
+                            margin: const EdgeInsets.all(15.0),
+                    )
                   ]))
             ]);
       }),
