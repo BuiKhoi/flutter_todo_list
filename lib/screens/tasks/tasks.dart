@@ -11,6 +11,7 @@ class Tasks extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('TodoList'),
+          backgroundColor: Colors.teal[800],
         ),
         body: ChangeNotifierProvider.value(
           value: todoList,

@@ -8,28 +8,43 @@ class TaskWidget extends StatelessWidget {
   TextStyle _taskStyle(completed) {
     if (completed)
       return TextStyle(
-        color: Colors.black54,
+        color: Colors.black38,
         decoration: TextDecoration.lineThrough,
       );
     else
-      return TextStyle(decoration: TextDecoration.none);
+      return TextStyle(
+        decoration: TextDecoration.none,
+      );
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskModel>(builder: (context, task, child) {
-      return CheckboxListTile(
-        title: Text(
-          task.text,
-          style: _taskStyle(task.completed),
-        ),
-        value: task.completed,
-        onChanged: (newValue) {
-          task.toggle();
-          Provider.of<TodoListModel>(context, listen: false)
-              .saveTasksToSharedPrefs();
-        },
-        controlAffinity: ListTileControlAffinity.leading,
+      return Container(
+        child: CheckboxListTile(
+          title: Text(
+            task.text,
+            style: _taskStyle(task.completed),
+          ),
+          secondary: Icon(Icons.delete),
+          value: task.completed,
+          onChanged: (newValue) {
+            task.toggle();
+            Provider.of<TodoListModel>(context, listen: false)
+                .saveTasksToSharedPrefs();
+          },
+          activeColor: Colors.black87,
+          controlAffinity: ListTileControlAffinity.leading,
+          ),
+          margin: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(color: Colors.teal[300], spreadRadius: 2),
+            ],
+          ),
+          width: 48.0,
+          height: 48.0,
       );
     });
   }
