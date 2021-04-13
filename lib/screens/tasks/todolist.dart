@@ -21,38 +21,36 @@ class TodoListWidget extends StatelessWidget {
           );
         }),
       ),
-      Consumer<TodoListModel>(builder: (contexst, todoList, child) {
+      Consumer<TodoListModel>(builder: (context, todoList, child) {
         return Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                  child: Column(children: <Widget>[
-                Container(
-                    child: TextField(
-                        controller: _controller,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.teal[500])),
-                            labelText: 'New task'),
-                        onSubmitted: (newTask) {
-                          todoList.addTaks(TaskModel(
-                              text:
-                                  newTask)); // create new instance of task changeNotifier model
-                          _controller
-                              .clear(); // clear the text input after adding taks
-                          todoList.saveTasksToSharedPrefs();
-                        }),
-                margin: const EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                )
-
-              ])),
-              Align(
-                  alignment: Alignment.bottomRight,
-                  child: Column(children: <Widget>[
-                    Container(
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  constraints: BoxConstraints(minWidth: 100, maxWidth: 980),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: Container(
+                              child: TextField(
+                                  controller: _controller,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.teal),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20))),
+                                      labelText: 'new task'),
+                                  onSubmitted: (newTask) {
+                                    todoList.addTaks(TaskModel(
+                                        text:
+                                            newTask)); // create new instance of task changeNotifier model
+                                    _controller
+                                        .clear(); // clear the text input after adding taks
+                                    todoList.saveTasksToSharedPrefs();
+                                  }))),
+                      Container(
                         child: FloatingActionButton(
                             onPressed: () {
                               todoList
@@ -64,9 +62,10 @@ class TodoListWidget extends StatelessWidget {
                             backgroundColor: Colors.teal[300],
                             hoverColor: Colors.teal[600],
                             child: const Icon(Icons.add)),
-                            margin: const EdgeInsets.all(15.0),
-                    )
-                  ]))
+                        margin: const EdgeInsets.all(15.0),
+                      )
+                    ],
+                  )),
             ]);
       }),
     ]);
